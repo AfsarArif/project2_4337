@@ -44,3 +44,21 @@ follow_actions(_, R, C, [], R, C).
 follow_actions(Maze, R, C, [Move | Rest], ER, EC) :-
     step(Maze, R, C, Move, R2, C2),
     follow_actions(Maze, R2, C2, Rest, ER, EC).
+
+step(Maze, R, C, Move, R2, C2) :-
+    delta(Move, DR, DC),
+    R2 is R + DR,
+    C2 is C + DC,
+
+    % Must stay in bounds
+    in_bounds(Maze, R2, C2),
+
+    % Must not hit a wall
+    cell_at(Maze, R2, C2, Cell),
+    Cell \= w.
+
+% Movement direction deltas
+delta(left,  0, -1).
+delta(right, 0,  1).
+delta(up,   -1,  0).
+delta(down,  1,  0).
