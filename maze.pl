@@ -38,3 +38,9 @@ cell_at(Maze, R, C, V) :-
 
 start_position(Maze, R, C) :-
     cell_at(Maze, R, C, s).
+
+follow_actions(_, R, C, [], R, C).
+
+follow_actions(Maze, R, C, [Move | Rest], ER, EC) :-
+    step(Maze, R, C, Move, R2, C2),
+    follow_actions(Maze, R2, C2, Rest, ER, EC).
