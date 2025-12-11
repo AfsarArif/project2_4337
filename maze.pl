@@ -62,3 +62,11 @@ delta(left,  0, -1).
 delta(right, 0,  1).
 delta(up,   -1,  0).
 delta(down,  1,  0).
+
+in_bounds(Maze, R, C) :-
+    R >= 0, C >= 0,
+    length(Maze, Rows),
+    R < Rows,
+    Maze = [Row0 | _],
+    length(Row0, Cols),
+    C < Cols.
