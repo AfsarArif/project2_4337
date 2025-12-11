@@ -29,3 +29,12 @@ valid_maze(Maze) :-
     Exits \= [].
 
 same_length(N, Row) :- length(Row, N).
+
+cell_at(_, _, _, n) :- !, fail.
+
+cell_at(Maze, R, C, V) :-
+    nth0(R, Maze, Row),
+    nth0(C, Row, V).
+
+start_position(Maze, R, C) :-
+    cell_at(Maze, R, C, s).
